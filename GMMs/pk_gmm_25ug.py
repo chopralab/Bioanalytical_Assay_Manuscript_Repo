@@ -150,7 +150,7 @@ def sm_ggm(inp,metric="aic"):
         plt.yticks(())
         plt.subplots_adjust(hspace=.35, bottom=.02)
         plt.tight_layout()
-        plt.savefig("pk_gmm_{0}_25ug.pdf".format(i1),dpi=300)
+        #plt.savefig("pk_gmm_{0}_25ug.pdf".format(i1),dpi=300)
         plt.show()
 
 

@@ -18,7 +18,6 @@ ain = np.abs(np.reshape(np.array(pk_a_1),(-1,10)))
 
 
 mmft = MinMaxScaler().fit_transform
-
 tags = ["Generic-Tag","Tag-6","Tag-8","Tag-9","Tag-12","Tag-17"]
 biotin = ["6-Biotin","8-Biotin","9-Biotin","12-Biotin","17-Biotin"]
 ant = ['1 ug']
