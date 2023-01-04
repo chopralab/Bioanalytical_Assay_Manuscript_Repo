@@ -1,18 +1,11 @@
-import sklearn
-from sklearn import metrics
-from sklearn import preprocessing
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from sklearn.decomposition import PCA
+from sklearn.preprocessing import MinMaxScaler
 import copy
 import numpy as np
 import itertools
-from scipy import linalg
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from sklearn import mixture
-from scipy import linalg
 from mpl_toolkits.mplot3d import Axes3D
-import umap
 import random
 import pandas as pd
 seed = 25
@@ -25,9 +18,6 @@ ain = np.abs(np.reshape(np.array(pk_a_25),(-1,10)))
 
 
 mmft = MinMaxScaler().fit_transform
-
-ssft = StandardScaler().fit_transform
-
 
 tags = ["Generic-Tag","Tag-6","Tag-8","Tag-9","Tag-12","Tag-17"]
 biotin = ["6-Biotin","8-Biotin","9-Biotin","12-Biotin","17-Biotin"]

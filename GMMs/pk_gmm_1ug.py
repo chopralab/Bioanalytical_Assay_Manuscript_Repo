@@ -1,17 +1,11 @@
-import sklearn
-from sklearn import metrics
+#This script plots applies the GMM scoring 
 from sklearn import preprocessing
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from sklearn.decomposition import PCA
+from sklearn.preprocessing import MinMaxScaler
 import copy
 import numpy as np
 import itertools
-from scipy import linalg
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 from sklearn import mixture
-from scipy import linalg
-from mpl_toolkits.mplot3d import Axes3D
 import umap
 import random
 import pandas as pd
@@ -24,9 +18,6 @@ ain = np.abs(np.reshape(np.array(pk_a_1),(-1,10)))
 
 
 mmft = MinMaxScaler().fit_transform
-
-ssft = StandardScaler().fit_transform
-
 
 tags = ["Generic-Tag","Tag-6","Tag-8","Tag-9","Tag-12","Tag-17"]
 biotin = ["6-Biotin","8-Biotin","9-Biotin","12-Biotin","17-Biotin"]
@@ -44,19 +35,6 @@ for i in range(len(ain)):
     T = g%6
     pl.append(tags[T]+"/"+biotin[B]+ " antigen ["+ant[a]+"] format "+form[F])
     pl2.append([T,B,a,F])
-
-
-def bdm(jv):
-    bd = []
-    bd2 = []
-    of = []
-    for i in np.arange(0,180,30):
-        bd.append(np.abs(pk_a_25[i:i+30,jv]))
-        bd2.append(np.abs(pk_a_1[i:i+30,jv]))   
-        out = [bd,bd2]
-        out = np.array(out)
-        of.append(out.flatten())
-    return(of)
 
 #pk_a shape is 180 by 10 (anal. vals), first dimension is the six tags repeated
 #for each of the five biotin-IDs which in turn
@@ -146,7 +124,6 @@ def sm_ggm(inp,metric="aic"):
                     bic.append(gmm.aic(avv2))
                 elif metric == 'score':
                     bic.append(-1*gmm.score(avv2))
-                #bic.append(gmm.aic(avv2)-(gmm.score(avv2)))
                 gmm_10[-1].append(bic[-1])
                 if bic[-1] < lowest_bic:
                     lowest_bic = bic[-1]
@@ -155,25 +132,7 @@ def sm_ggm(inp,metric="aic"):
         bic = np.array(bic)
         color_iter = itertools.cycle(['#1100FF', '#4AA7EA','#4AE2EA','#4AEACD','#8AEA4A' ,'#CFEA4A','#EAD24A','#EAA568', "#EA644A" ,"#E33535"])
         clf = best_gmm
-        bars = []
-        # Plot the BIC scores
         plt.figure(figsize=(6, 2))
-        #spl = plt.subplot(1, 1, 1)
-        '''
-        for i, (cv_type, color) in enumerate(zip(cv_types, color_iter)):
-            xpos = np.array(n_components_range) + .2 * (i - 2)
-            bars.append(plt.bar(xpos, bic[i * len(n_components_range):
-                                        (i + 1) * len(n_components_range)],
-                                width=.2, color=color))
-        plt.xticks(n_components_range)
-        plt.ylim([bic.min() * 1.01 - .01 * bic.max(), bic.max()])
-        plt.title('AIC score per model')
-        xpos = np.mod(bic.argmin(), len(n_components_range)) +1 + .65 +\
-            .2 * np.floor(bic.argmin() / len(n_components_range))
-        plt.text(xpos, bic.min() * 0.97 + .03 * bic.max(), '*', fontsize=14)
-        spl.set_xlabel('Number of components')
-        spl.legend([b[0] for b in bars], cv_types)
-        '''
         # Plot the winner
         splot = plt.subplot(1, 1, 1)
         Y_ = clf.predict(avv2)
@@ -373,8 +332,8 @@ def sm_ggm2(inp):
         #plt.title('Selected GMM: {0} model, {1} components'.format(ct,nc))
         plt.subplots_adjust(hspace=.35, bottom=.02)
         plt.tight_layout()
-        plt.savefig("Plots/PK/pk_gmm_2d.pdf",dpi=300)
-        plt.savefig("Plots/PK/pk_gmm_2d",dpi=300)
+        #plt.savefig("Plots/PK/pk_gmm_2d.pdf",dpi=300)
+        #plt.savefig("Plots/PK/pk_gmm_2d",dpi=300)
         plt.show()
         break
 
@@ -530,7 +489,7 @@ def sm_ggm_10(inp):
         #plt.title('UMAP of GMM Clustered PKA Assays')
         plt.subplots_adjust(hspace=.35, bottom=.02)
         plt.tight_layout()
-        plt.savefig("Plots/PK/pk_gmm_full_1ug.pdf",dpi=300)
+        #plt.savefig("Plots/PK/pk_gmm_full_1ug.pdf",dpi=300)
         plt.show()
         return(Y_)
         break
@@ -548,7 +507,7 @@ for i in range(len(ain)):
 c_LLL = sm_ggm_10(np.abs(np.reshape(np.array(pk_a_1),(-1,10))))
 
 gmm_all = pd.DataFrame(gmm_all)
-gmm_all.to_csv("Data/PK/gmm_pk_full_aic_1ug.csv",index=False,header=False)
+#gmm_all.to_csv("Data/PK/gmm_pk_full_aic_1ug.csv",index=False,header=False)
 
 gmm_all_scores = pd.DataFrame(gmm_all_scores)
-gmm_all_scores.to_csv("Data/PK/gmm_pk_full_scores_1ug.csv",index=False,header=False)
+#gmm_all_scores.to_csv("Data/PK/gmm_pk_full_scores_1ug.csv",index=False,header=False)
