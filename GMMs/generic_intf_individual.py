@@ -1,17 +1,6 @@
 import numpy as np
-from optparse import OptionParser
-from pyexcel_xlsx import save_data
-from collections import OrderedDict
 from openpyxl import load_workbook
-from openpyxl.styles import Font, Color, Alignment, Border, Side, colors, PatternFill
-from openpyxl.styles.differential import DifferentialStyle
-from openpyxl.formatting.rule import Rule
-
-from openpyxl import load_workbook
-from openpyxl.styles import Font, Color, Alignment, Border, Side, colors, PatternFill, Fill
-from openpyxl.styles.differential import DifferentialStyle
-from openpyxl.formatting.rule import Rule
-
+from openpyxl.styles import Alignment, colors
 import pandas as pd
 import random
 seed = 7
@@ -354,20 +343,12 @@ for replicate in out:
 np.save("Data/Generic/generic_data",out2)
 
 
-import sklearn
-from sklearn import metrics
-from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.decomposition import PCA
-import copy
 import numpy as np
 import itertools
-from scipy import linalg
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 from sklearn import mixture
-from scipy import linalg
-from mpl_toolkits.mplot3d import Axes3D
+
 
 def pk_bd(inp):
     org = []
